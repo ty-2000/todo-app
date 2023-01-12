@@ -153,5 +153,13 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
       Redirect("/todo")
     }
   }
+
+  def deleteTodo(id: Int) = Action.async {implicit req => 
+    for {
+      oldTodoOpt <- TodoRepository.remove(Todo.Id(id))
+    } yield {
+      Redirect("/todo")
+    }
+  }
 }
 
